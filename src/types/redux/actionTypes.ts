@@ -1,0 +1,4 @@
+export enum EListActionTypes {
+  UPDATE_LIST_ITEM = "UPDATE_LIST_ITEM",
+  UPDATE_COUNTER = "UPDATE_COUNTER",
+}
