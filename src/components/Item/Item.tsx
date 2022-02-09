@@ -1,13 +1,26 @@
-import React, { memo, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { updateListCounterAction } from "../../actions/updateListCounterAction";
-
+import React, { memo, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { incrementCounterAction } from "../../actions";
+import { selectors } from "../../selectors";
+import { IListState } from "../../types/redux/state";
 interface IItemPrpos {
-  count: number;
+  id: number;
 }
 
-export const Item = memo<IItemPrpos>(({ count }) => {
+export const Item = memo<IItemPrpos>(({ id }) => {
+  const isMount = useRef<boolean>(false);
   const dispatch = useDispatch();
+  const item = useSelector((state: IListState) =>
+    selectors.itemById(state, id)
+  );
 
-  return <p>Item count: {count}</p>;
+  useEffect(() => {
+    if (!isMount.current) {
+      isMount.current = true;
+    } else {
+      dispatch(incrementCounterAction());
+    }
+  });
+
+  return <p>Item count: {item.count}</p>;
 });

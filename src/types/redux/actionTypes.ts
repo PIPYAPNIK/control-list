@@ -1,4 +1,13 @@
+import { incrementCounterAction, updateListItemAction } from "../../actions";
+
 export enum EListActionTypes {
   UPDATE_LIST_ITEM = "UPDATE_LIST_ITEM",
-  UPDATE_COUNTER = "UPDATE_COUNTER",
 }
+
+export enum ECounterActionTypes {
+  INCREMENT_COUNTER = "INCREMENT_COUNTER",
+}
+
+export type TReduxActions =
+  | ReturnType<typeof updateListItemAction>
+  | ReturnType<typeof incrementCounterAction>;
